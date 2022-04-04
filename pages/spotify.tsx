@@ -20,7 +20,7 @@ const Spotify: React.FC = () => {
 		colors: 3,
 	})
 	// = usePalette(data?.item.album.images[0].url)
-	// eslint-disable-next-line no-nested-ternar7
+	// eslint-disable-next-line no-nested-ternary
 	return data && colors && !error ? (
 		<>
 			<Div
