@@ -6,7 +6,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		'https://api.spotify.com/v1/me/player/currently-playing'
 	)
 
-		const json = await response.json()
+	const json = await response.json()
 	console.log(json)
 
 	res.json(json)

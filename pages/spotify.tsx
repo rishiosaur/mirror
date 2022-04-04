@@ -2,9 +2,9 @@ import React from 'react'
 import useSWR from 'swr'
 
 import useImageColor from 'use-image-color'
+import { motion } from 'framer-motion'
 import { fetcher } from '../src/util/fetcher'
 
-import { motion } from 'framer-motion'
 const Div = motion.div
 const Image = motion.img
 const Title = motion.h1
@@ -15,46 +15,98 @@ const Spotify: React.FC = () => {
 		refreshInterval: 500,
 	})
 
-
-		const { colors } = useImageColor(data?.item.album.images[0].url, { cors: true, colors: 3,  })
-				// = usePalette(data?.item.album.images[0].url)
+	const { colors } = useImageColor(data?.item.album.images[0].url, {
+		cors: true,
+		colors: 3,
+	})
+	// = usePalette(data?.item.album.images[0].url)
 	// eslint-disable-next-line no-nested-ternar7
 	return data && colors && !error ? (
 		<>
-			<Div style={{width:"100%", height:"100%", position: "absolute", top: 0, left: 0, display: 'flex', alignItems: "center", justifyContent:"center"}} animate={{backgroundColor: colors}} transition={{ ease: "easeInOut", duration: 10, repeat: Infinity, repeatType: "reverse"  }}>
-					<div style={{width:"50%", height: "50%", display:"flex", flexDirection:"row", backgroundColor: "rgba(255, 255, 255, 0.2)", "backdropFilter": "blur(50px)", borderRadius:"5px", border:"1px solid rgba(255, 255, 255, 0.3)", boxShadow:"0 0 50px rgba(255, 255, 255, 0.1)"
-
-							 }}>
-							<div style={{width:"50%", display: 'flex', alignItems: "center", justifyContent:"center"}}>
-									<img src={data.item.album.images[0].url} style={{width:"75%", borderRadius:"5px", border:"1px solid rgba(255, 255, 255, 0.3)", boxShadow:"0 0 50px rgba(255, 255, 255, 0.3)"}} />
-							</div>
-
-							<div style={{width:"50%", display: 'flex', alignItems: "center", justifyContent:"center", flexDirection:"column"}}>
-									<div style={{width:"75%", color:"rgba(255, 255, 255, 0.6)"}}>
-
-											<div >
-													<Text style={{marginBottom: 0}}>{data.item.artists.map((artist) => artist.name).join(' & ')}'s</Text>
-													<Title style={{marginTop: 0}}>{data.item.name}</Title>
-											</div>
-											<div >
-													<Text style={{margin: 0}}>From</Text>
-													<Subtitle style={{marginTop: 0}}>{data.item.album.name}</Subtitle>
-											</div>
-											<div >
-													<Text style={{margin: 0}}>Released</Text>
-													<Subtitle style={{marginTop: 0}}>{new Date(data.item.album.release_date).toLocaleDateString()}</Subtitle>
-											</div>
-											<div >
-													<Text style={{margin: 0}}>Track</Text>
-													<Subtitle style={{marginTop: 0}}>{data.item.track_number} of {data.item.album.total_tracks}</Subtitle>
-											</div>
-
-
-
-									</div>
-							</div>
+			<Div
+				style={{
+					width: '100%',
+					height: '100%',
+					position: 'absolute',
+					top: 0,
+					left: 0,
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+				animate={{ backgroundColor: colors }}
+				transition={{
+					ease: 'easeInOut',
+					duration: 10,
+					repeat: Infinity,
+					repeatType: 'reverse',
+				}}>
+				<div
+					style={{
+						width: '50%',
+						height: '50%',
+						display: 'flex',
+						flexDirection: 'row',
+						backgroundColor: 'rgba(255, 255, 255, 0.2)',
+						backdropFilter: 'blur(50px)',
+						borderRadius: '5px',
+						border: '1px solid rgba(255, 255, 255, 0.3)',
+						boxShadow: '0 0 50px rgba(255, 255, 255, 0.1)',
+					}}>
+					<div
+						style={{
+							width: '50%',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}>
+						<img
+							src={data.item.album.images[0].url}
+							style={{
+								width: '75%',
+								borderRadius: '5px',
+								border: '1px solid rgba(255, 255, 255, 0.3)',
+								boxShadow: '0 0 50px rgba(255, 255, 255, 0.3)',
+							}}
+						/>
 					</div>
 
+					<div
+						style={{
+							width: '50%',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							flexDirection: 'column',
+						}}>
+						<div style={{ width: '75%', color: 'rgba(255, 255, 255, 0.6)' }}>
+							<div>
+								<Text style={{ marginBottom: 0 }}>
+									{data.item.artists.map((artist) => artist.name).join(' & ')}'s
+								</Text>
+								<Title style={{ marginTop: 0 }}>{data.item.name}</Title>
+							</div>
+							<div>
+								<Text style={{ margin: 0 }}>From</Text>
+								<Subtitle style={{ marginTop: 0 }}>
+									{data.item.album.name}
+								</Subtitle>
+							</div>
+							<div>
+								<Text style={{ margin: 0 }}>Released</Text>
+								<Subtitle style={{ marginTop: 0 }}>
+									{new Date(data.item.album.release_date).toLocaleDateString()}
+								</Subtitle>
+							</div>
+							<div>
+								<Text style={{ margin: 0 }}>Track</Text>
+								<Subtitle style={{ marginTop: 0 }}>
+									{data.item.track_number} of {data.item.album.total_tracks}
+								</Subtitle>
+							</div>
+						</div>
+					</div>
+				</div>
 			</Div>
 		</>
 	) : error ? (
