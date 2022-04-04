@@ -21,8 +21,7 @@ const Spotify: React.FC = () => {
 	})
 	// = usePalette(data?.item.album.images[0].url)
 	// eslint-disable-next-line no-nested-ternary
-	return data && colors && !error ? (
-		<>
+	return (<>
 			<Div
 				style={{
 					width: '100%',
@@ -34,7 +33,8 @@ const Spotify: React.FC = () => {
 					alignItems: 'center',
 					justifyContent: 'center',
 				}}
-				animate={{ backgroundColor: colors }}
+				animate={{ backgroundColor: (data?.is_playing && colors) ? colors : ['#f72585',"#b5179e","#7209b7","#560bad","#480ca8","#3a0ca3","#3f37c9","#4361ee","#4895ef","#4cc9f0"]
+				}}
 				transition={{
 					ease: 'easeInOut',
 					duration: 10,
@@ -43,7 +43,7 @@ const Spotify: React.FC = () => {
 				}}>
 				<div
 					style={{
-						width: '50%',
+						width: data?.is_playing && colors && !error ? "50%" : "35%",
 						height: '50%',
 						display: 'flex',
 						flexDirection: 'row',
@@ -53,23 +53,26 @@ const Spotify: React.FC = () => {
 						border: '1px solid rgba(255, 255, 255, 0.3)',
 						boxShadow: '0 0 50px rgba(255, 255, 255, 0.1)',
 					}}>
-					<div
-						style={{
-							width: '50%',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
+						{
+								data?.is_playing && colors && !error && (<div
+								style={{
+								width: '50%',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
 						}}>
-						<img
-							src={data.item.album.images[0].url}
-							style={{
+								<img
+								src={data.item.album.images[0].url}
+								style={{
 								width: '75%',
 								borderRadius: '5px',
 								border: '1px solid rgba(255, 255, 255, 0.3)',
 								boxShadow: '0 0 50px rgba(255, 255, 255, 0.3)',
-							}}
-						/>
-					</div>
+						}}
+								/>
+								</div>)
+						}
+
 
 					<div
 						style={{
@@ -80,40 +83,44 @@ const Spotify: React.FC = () => {
 							flexDirection: 'column',
 						}}>
 						<div style={{ width: '75%', color: 'rgba(255, 255, 255, 0.6)' }}>
-							<div>
-								<Text style={{ marginBottom: 0 }}>
-									{data.item.artists.map((artist) => artist.name).join(' & ')}'s
-								</Text>
-								<Title style={{ marginTop: 0 }}>{data.item.name}</Title>
-							</div>
-							<div>
-								<Text style={{ margin: 0 }}>From</Text>
-								<Subtitle style={{ marginTop: 0 }}>
-									{data.item.album.name}
-								</Subtitle>
-							</div>
-							<div>
-								<Text style={{ margin: 0 }}>Released</Text>
-								<Subtitle style={{ marginTop: 0 }}>
-									{new Date(data.item.album.release_date).toLocaleDateString()}
-								</Subtitle>
-							</div>
-							<div>
-								<Text style={{ margin: 0 }}>Track</Text>
-								<Subtitle style={{ marginTop: 0 }}>
-									{data.item.track_number} of {data.item.album.total_tracks}
-								</Subtitle>
-							</div>
+								{
+										data?.is_playing && colors && !error ? (<>
+												<div>
+														<Text style={{ marginBottom: 0 }}>
+																{data.item.artists.map((artist) => artist.name).join(' & ')}'s
+														</Text>
+														<Title style={{ marginTop: 0 }}>{data.item.name}</Title>
+												</div>
+												<div>
+														<Text style={{ margin: 0 }}>From</Text>
+														<Subtitle style={{ marginTop: 0 }}>
+																{data.item.album.name}
+														</Subtitle>
+												</div>
+												<div>
+														<Text style={{ margin: 0 }}>Released</Text>
+														<Subtitle style={{ marginTop: 0 }}>
+																{new Date(data.item.album.release_date).toLocaleDateString()}
+														</Subtitle>
+												</div>
+												<div>
+														<Text style={{ margin: 0 }}>Track</Text>
+														<Subtitle style={{ marginTop: 0 }}>
+																{data.item.track_number} of {data.item.album.total_tracks}
+														</Subtitle>
+												</div></>) : <div>
+												<Text style={{ marginBottom: 0 }}>
+														Listening to
+												</Text>
+												<Title style={{ marginTop: 0 }}>Nothing!</Title>
+										</div>
+								}
+
 						</div>
 					</div>
 				</div>
 			</Div>
-		</>
-	) : error ? (
-		<p>Error.</p>
-	) : (
-		<p>Loading...</p>
-	)
+		</>)
 }
 
 export default Spotify
