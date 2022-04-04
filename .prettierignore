@@ -9,3 +9,5 @@ yarn.lock
 .prettierignore
 .env.local
 LICENSE
+.env
+.idea
