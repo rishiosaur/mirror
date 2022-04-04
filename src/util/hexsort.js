@@ -61,7 +61,6 @@ export const hexSort = {
 		let dG
 		let dB
 
-
 		const hsl = []
 
 		const min = Math.min(r, g, b)
