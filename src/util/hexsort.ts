@@ -1,5 +1,5 @@
 export const hexSort = {
-	hexValueSanitize (color) {
+	hexValueSanitize(color) {
 		return color
 			.replace(
 				/^#?([a-f\d])([a-f\d])([a-f\d])$/i,
@@ -7,15 +7,15 @@ export const hexSort = {
 			)
 			.replace('#', '')
 	},
-	hexToDec (hex) {
-		return parseInt((`${hex  }`).replace(/[^a-f0-9]/gi, ''), 16)
+	hexToDec(hex) {
+		return parseInt(`${hex}`.replace(/[^a-f0-9]/gi, ''), 16)
 	},
-	decToHex (number) {
+	decToHex(number) {
 		return number < 0
 			? 0xffffffff + number + 1
 			: parseInt(number, 10).toString(16)
 	},
-	hexToRgb (hex) {
+	hexToRgb(hex) {
 		hex = this.hexValueSanitize(hex)
 		return hex.length === 3
 			? [
@@ -29,7 +29,7 @@ export const hexSort = {
 					this.hexToDec(hex[4] + hex[5]),
 			  ]
 	},
-	hexBrightness (hex, type) {
+	hexBrightness(hex, type) {
 		let conversion
 
 		if (type === 'BT601') {
@@ -50,18 +50,23 @@ export const hexSort = {
 			this.hexToDec(hex[4] + hex[5]) * conversion[2]
 		)
 	},
-	rgbToHsv (color) {
+	rgbToHsv(color) {
 		const r = color[0] / 255
 		const g = color[1] / 255
 		const b = color[2] / 255
 
-		let h; let s; let min; let max; let del; let dR; let dG; let dB; let hsl
+		let h
+		let s
+		let dR
+		let dG
+		let dB
 
-		hsl = []
 
-		min = Math.min(r, g, b)
-		max = Math.max(r, g, b)
-		del = max - min
+		const hsl = []
+
+		const min = Math.min(r, g, b)
+		const max = Math.max(r, g, b)
+		const del = max - min
 
 		if (del === 0) {
 			h = 0
@@ -96,8 +101,9 @@ export const hexSort = {
 
 		return hsl
 	},
-	hexToHsv (hex) {
-		let rgb; let hsv
+	hexToHsv(hex) {
+		let rgb
+		let hsv
 
 		hex = this.hexValueSanitize(hex)
 
@@ -106,7 +112,7 @@ export const hexSort = {
 
 		return hsv
 	},
-	mostBrightColor (colors, type) {
+	mostBrightColor(colors, type) {
 		let mostBright = false
 		let hex
 
@@ -124,9 +130,12 @@ export const hexSort = {
 
 		return `#${mostBright}`
 	},
-	mostSaturatedColor (colors) {
+	mostSaturatedColor(colors) {
 		let mostSaturated = false
-		let hex; let hsv; let saturation; let oldHsv
+		let hex
+		let hsv
+		let saturation
+		let oldHsv
 
 		colors.forEach((color) => {
 			hex = this.hexValueSanitize(color)
@@ -145,7 +154,7 @@ export const hexSort = {
 
 		return `#${mostSaturated}`
 	},
-	colorMixer (hex1, hex2, percent) {
+	colorMixer(hex1, hex2, percent) {
 		hex1 = this.hexValueSanitize(hex1)
 		hex2 = this.hexValueSanitize(hex2)
 
@@ -181,7 +190,7 @@ export const hexSort = {
 
 		return `#${red_hex + green_hex + blue_hex}`
 	},
-	sortColors (colors, type) {
+	sortColors(colors, type) {
 		console.log(colors)
 		const input = colors.slice(0)
 		const output = []
@@ -196,7 +205,7 @@ export const hexSort = {
 		}
 		return output
 	},
-	mixSortColors (colors, type, mixcolor, percentage) {
+	mixSortColors(colors, type, mixcolor, percentage) {
 		const input = colors.slice(0)
 		const output = []
 
