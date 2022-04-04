@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import useImageColor from 'use-image-color'
 import { motion } from 'framer-motion'
 import { fetcher } from '../src/util/fetcher'
-import {hexSort} from '../src/util/hexsort'
+import { hexSort } from '../src/util/hexsort'
 
 const Div = motion.div
 const Image = motion.img
@@ -60,8 +60,8 @@ const Spotify: React.FC = () => {
 				}}>
 				<div
 					style={{
-						width: data?.is_playing && colors && !error ? '50%' : '35%',
-						height: '50%',
+						width: data?.is_playing && colors && !error ? '50%' : '15%',
+						height: data?.is_playing && colors && !error ? '50%' : '35%',
 						display: 'flex',
 						flexDirection: 'row',
 						backgroundColor: 'rgba(255, 255, 255, 0.2)',
