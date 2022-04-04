@@ -1,3 +1,7 @@
-const App = ({ Component, pageProps }) => <Component {...pageProps} />
+import '../src/styles/spotify.css'
 
-export default App
+function MyApp({ Component, pageProps }) {
+    return <Component {...pageProps} />
+}
+
+export default MyApp
