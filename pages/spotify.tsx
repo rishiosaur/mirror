@@ -60,10 +60,11 @@ const Spotify: React.FC = () => {
 				}}>
 				<div
 					style={{
-						width: data?.is_playing && colors && !error ? '50%' : '15%',
+						width: data?.is_playing && colors && !error ? '50%' : '35%',
 						height: data?.is_playing && colors && !error ? '50%' : '35%',
 						display: 'flex',
 						flexDirection: 'row',
+
 						backgroundColor: 'rgba(255, 255, 255, 0.2)',
 						backdropFilter: 'blur(50px)',
 						borderRadius: '5px',
